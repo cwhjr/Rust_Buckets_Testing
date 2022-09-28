@@ -1,9 +1,9 @@
-function play(numberOfPlayers = 2) {
-  setup(numberOfPlayers);
+function play(numberOfActivePlayers = 2) {
+  setup(numberOfActivePlayers);
   for (let x = 0; x < players.length; x++){
     diceRolls(x);
-    console.log(players[x].dicetrack.spaces.numberOfDice[0]);
-    console.log(players[x].dicebag);
+    // console.log(players[x].dicetrack.spaces.numberOfDice[0]);
+    // console.log(players[x].dicebag);
     debugger;
   }
 }
@@ -12,9 +12,16 @@ function play(numberOfPlayers = 2) {
  * Rolls a single die. Used internally.
  */
   
-function dieRoll() {
-      let roll = Math.floor(Math.random()*6 + 1);
+function dieRoll(randomDie) {
+      let roll = Math.floor(Math.random()*6 + Math.floor((randomDie/4)));
+      // console.log(randomDie);
+      // console.log(randomDie/4);
+      // console.log(Math.floor(1+ randomDie/4));
+      // console.log(roll);
+      // console.log(diceTypes.value[roll]);
+      // debugger;
       return roll;
+      
 }
 
 //Rolls each player's next allotment of dice.
@@ -28,8 +35,8 @@ function diceRolls(y) {
     //Select and roll dicetrack.numberOfDice dice from dicebag.
   for (let i = 1; i <= players[y].dicetrack.spaces.numberOfDice[0]; i++){
     const randomDie = players[y].dicebag[Math.floor(Math.random() * players[y].dicebag.length)]
-    players[y].dicetrack.diceRolled.value.push(dieRoll());
-    players[y].dicetrack.diceRolled.type.push(players[y].dicebag[0]);
+    players[y].dicetrack.diceRolled.value.push(diceTypes.value[dieRoll(randomDie)]);
+    players[y].dicetrack.diceRolled.type.push(diceTypes.type[randomDie]);
     
     //Remove a die from dicebag after rolling it.
     players[y].dicebag.shift();
@@ -37,7 +44,7 @@ function diceRolls(y) {
 
   //Increment space.numberOfDice AFTER rolling appropriate number of dice.
   players[y].dicetrack.spaces.numberOfDice.shift();
-
+debugger;
   // console.log(players[y].dicetrack.diceRolled.value);
   // return rolls;
   
@@ -50,8 +57,32 @@ function shuffleArray(array) {
     }
 }
 
-function diceConversion() {
-  let 
+let diceTypes ={
+  type : [
+    'white',
+    'red',
+    'gold' ,
+    'blue'
+  ],
+
+  value : [
+    'plank', 
+    'cannonball', 
+    'powderkeg',
+    'bucket',
+    'hat',
+    'fire',
+    'sinking'
+  ]
 }
+
+
+// let diceValues = {
+//   0 : ['cannonball']
+
+
+// function diceConversion() {
+//   let 
+// }
 
 

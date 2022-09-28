@@ -17,7 +17,7 @@ class player{
           value : []
         },
       },
-      this.dicebag = [1,1,1,1,1,1]
+      this.dicebag = [0,0,0,0,0,0]
     }
 }
 let players = [];
