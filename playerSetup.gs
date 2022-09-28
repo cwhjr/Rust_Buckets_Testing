@@ -20,8 +20,9 @@ class player{
       this.dicebag = [0,0,0,0,0,0]
     }
 }
+
 let players = [];
-function setup(x=2) {
+function setup(x) {
   for (let i = 0; i < x; i++) {
      players[i] = new player();
   }

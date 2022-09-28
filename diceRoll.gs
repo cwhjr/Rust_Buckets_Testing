@@ -1,12 +1,4 @@
-function play(numberOfActivePlayers = 2) {
-  setup(numberOfActivePlayers);
-  for (let x = 0; x < players.length; x++){
-    diceRolls(x);
-    // console.log(players[x].dicetrack.spaces.numberOfDice[0]);
-    // console.log(players[x].dicebag);
-    debugger;
-  }
-}
+
 
 /**
  * Rolls a single die. Used internally.
@@ -14,12 +6,6 @@ function play(numberOfActivePlayers = 2) {
   
 function dieRoll(randomDie) {
       let roll = Math.floor(Math.random()*6 + Math.floor((randomDie/4)));
-      // console.log(randomDie);
-      // console.log(randomDie/4);
-      // console.log(Math.floor(1+ randomDie/4));
-      // console.log(roll);
-      // console.log(diceTypes.value[roll]);
-      // debugger;
       return roll;
       
 }
@@ -61,10 +47,9 @@ let diceTypes ={
   type : [
     'white',
     'red',
-    'gold' ,
+    'gold',
     'blue'
   ],
-
   value : [
     'plank', 
     'cannonball', 
@@ -75,14 +60,5 @@ let diceTypes ={
     'sinking'
   ]
 }
-
-
-// let diceValues = {
-//   0 : ['cannonball']
-
-
-// function diceConversion() {
-//   let 
-// }
 
 
