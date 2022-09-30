@@ -1,13 +1,8 @@
-
-
-/**
- * Rolls a single die. Used internally.
- */
-  
+//Rolls a single die.  
 function dieRoll(randomDie) {
       let roll = Math.floor(Math.random()*6 + Math.floor((randomDie/4)));
-      return roll;
-      
+      //debugger;
+      return roll;     
 }
 
 //Rolls each player's next allotment of dice.
@@ -15,25 +10,24 @@ function dieRoll(randomDie) {
 //Stores the type of die rolled in player.dicetrack.dicerolled.type.
 function diceRolls(y) {
     
-    //Shuffle each player's dicebag before selecting dice.
-    //Don't need to shuffle if I pick a randomDie from dicebag
-  //shuffleArray(players[y].dicebag)
-    
-    //Select and roll dicetrack.numberOfDice dice from dicebag.
+    //Randomly select and roll dicetrack.numberOfDice dice from dicebag.
     //This also determines the color of the die being rolled.
-  for (let i = 1; i <= players[y].dicetrack.spaces.numberOfDice[0]; i++){
+  for (let i = 1; i <= players[floatingPlayers[y]].dicetrack.spaces.numberOfDice[0]; i++){
     const randomDie = players[y].dicebag[Math.floor(Math.random() * players[y].dicebag.length)]
-    rolledDie = dieRoll(randomDie)
+
+    rolledDie = dieRoll(randomDie);
+    playerRolling = floatingPlayers[activeRollers[y]];
+
     //Determine the possible sides on the die based on the die color.
     diceTypeSides = diceSides[randomDie];
     
     //Deterine the symbol shown baesd on the die color and the die roll.
     diceTypeSide = diceValues[diceTypeSides[rolledDie]];
 
-    players[y].dicetrack.diceRolled.value.push(diceTypeSide);
-    players[y].dicetrack.diceRolled.type.push(diceTypes[randomDie]);
+    playerRolling.rolledDie.value.push(diceTypeSide);
+    playerRolling.rolledDie.type.push(diceTypes[randomDie]);
+    //sortRolledDice(y,players[y].rolledDice.value,players[y].rolledDice.type);
 
-    
     //Remove a die from dicebag after rolling it.
     players[y].dicebag.shift();
   }
