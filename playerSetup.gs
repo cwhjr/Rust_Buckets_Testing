@@ -22,15 +22,20 @@ class player{
 }
 
 let players = [];
-function setup(x) {
+let playersList = [];
+let playersRolling = [];
+function setup(x = 2) {
   for (let i = 0; i < x; i++) {
      players[i] = new player();
+     playersList.push(i);
+     y = Math.floor(Math.random() * 5);
+     for (let j = 1; j <= y; j++){
+       players[i].dicebag.push(Math.floor(Math.random() * 4));
+      }
   }
-  // player1 = new player();
-  for (let i = 0; i < x; i++) {
-    console.log(players[i].dicetrack.spaces.numberOfDice[0]);
-  }
-  // debugger;
+
+
+  debugger;
 }
 
 // console.log(player.dicetrack.quantity[0]);
