@@ -41,30 +41,55 @@ class Player{
     this.rolledDiceTotal = {
       type : [],
       value : []
-    }
+    },
+    this.floating = true,
+    this.rolling = true
   }
   
-  diceRolls(){
-    for (let i = 1; i <= this.dicetrack.spaces.numberOfDice[0]; i++){
-      const randomDie = this.dicebag[Math.floor(Math.random() * this.dicebag.length)]
+  diceRolls() {
+      for (d = 1; d <= this.dicetrack.spaces.redDiceToAdd[i]; d++){
+        this.dicebag.push(1)
+      }
+      for (let j = 1; i <= this.dicetrack.spaces.numberOfDice[i]; j++){
+        const randomDie = this.dicebag[Math.floor((Math.random() * this.dicebag.length))]
 
-      rolledDie = dieRoll(randomDie);
-      //playerRolling = floatingPlayers[activeRollers[y]];
+        rolledDie = dieRoll(randomDie);
+        //playerRolling = floatingPlayers[activeRollers[y]];
 
-      //Determine the possible sides on the die based on the die color.
-      diceTypeSides = diceSides[randomDie];
-      
-      //Deterine the symbol shown baesd on the die color and the die roll.
-      diceTypeSide = diceValues[diceTypeSides[rolledDie]];
+        //Determine the possible sides on the die based on the die color.
+        diceTypeSides = diceSides[randomDie];
+        
+        //Deterine the symbol shown baesd on the die color and the die roll.
+        diceTypeSide = diceValues[diceTypeSides[rolledDie]];
 
-      this.unplacedDice.value.push(diceTypeSide);
-      this.unplacedDice.type.push(diceTypes[randomDie]);
+        this.unplacedDice.value.push(diceTypeSide);
+        this.unplacedDice.type.push(diceTypes[randomDie]);
 
-      //Remove thie chosen die from dicebag after rolling it.
-      this.dicebag.splice(randomDie,1);
-    }
+        //Remove the chosen die from dicebag after rolling it.
+        this.dicebag.splice(randomDie,1);
+      }
   }
 
+  sortUnplacedDice() {
+    let diceCount = this.unplacedDice.value.length -1
+    for(i=0; i<diceCount; i++){
+      let currentType = this.unplacedDice.type[i];
+      let currentValue = this.unplacedDice.value[i];
+      if(currentDie == 'fire' && this.fire == 0) { 
+        [this.unplacedDice.type[0], currentType]= [currentType, this.unplacedDice.type[0]];
+        [this.unplacedDice.value[0], currentValue]= [currentValue, this.unplacedDice.value[0]]
+      } else {
+        [this.unplacedDice.type[diceCount], currentType]= [currentType, this.unplacedDice.type[diceCount]];
+        [this.unplacedDice.value[diceCount], currentValue]= [currentValue, this.unplacedDice.value[diceCount]]
+      }
+
+    }
+      
+  }
+
+  
+
+  resolveDiceTrack() {}
 }
 
 
