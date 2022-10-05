@@ -48,3 +48,26 @@
 //   Logger.log(countEquals(dice));
 
 // }
+
+  // sortUnplacedDice() {
+  //   let diceCount = this.unplacedDice.value.length -1
+  //   let firstDie = {
+  //     type : this.unplacedDice.type[0],
+  //     value : this.unplacedDice.value[0]
+  //   }
+  //   let lastDie = {
+  //     type : this.unplacedDice.type[diceCount],
+  //     value : this.unplacedDice.value[diceCount]
+  //   }
+  //   for(i=0; i<diceCount; i++){
+  //     let currentDie = {
+  //       type : this.unplacedDice.type[i],
+  //       value : this.unplacedDice.value[i]
+  //     }
+  //     if(currentType == 'fire' && this.fire == 0) { 
+  //       rearrangeDice(firstDie.type,currentDie.type,firstDie.value,currentDie.value)
+  //     } else {
+  //       rearrangeDice(lastDie.type,currentDie.type,currentDie.value,lastDie.value)
+  //     }
+
+  //   }

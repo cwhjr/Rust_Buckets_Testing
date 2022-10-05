@@ -47,20 +47,22 @@ class Player{
   }
   
   diceRolls() {
-      for (d = 1; d <= this.dicetrack.spaces.redDiceToAdd[i]; d++){
-        this.dicebag.push(1)
+    for (let i = 0; i < 6; i++){
+      let diceToAdd = this.dicetrack.spaces.redDiceToAdd[i]
+      for (let d = 1; d <= diceToAdd; d++){
+        this.dicebag.push('1')
       }
-      for (let j = 1; i <= this.dicetrack.spaces.numberOfDice[i]; j++){
+      for (let j = 1; j <= this.dicetrack.spaces.numberOfDice[i]; j++){
+        // debugger;
         const randomDie = this.dicebag[Math.floor((Math.random() * this.dicebag.length))]
+        // debugger;
+        let rolledDie = this.dieRoll(randomDie);
 
-        rolledDie = dieRoll(randomDie);
-        //playerRolling = floatingPlayers[activeRollers[y]];
-
-        //Determine the possible sides on the die based on the die color.
-        diceTypeSides = diceSides[randomDie];
+        //Determine the possible symbols on the die based on the die color.
+        let diceTypeSides = diceSides[randomDie];
         
-        //Deterine the symbol shown baesd on the die color and the die roll.
-        diceTypeSide = diceValues[diceTypeSides[rolledDie]];
+        //Deterine the symbol rolled based on the die color and the die roll.
+        let diceTypeSide = diceValues[diceTypeSides[rolledDie]];
 
         this.unplacedDice.value.push(diceTypeSide);
         this.unplacedDice.type.push(diceTypes[randomDie]);
@@ -68,43 +70,65 @@ class Player{
         //Remove the chosen die from dicebag after rolling it.
         this.dicebag.splice(randomDie,1);
       }
-  }
-
-  sortUnplacedDice() {
-    let diceCount = this.unplacedDice.value.length -1
-    for(i=0; i<diceCount; i++){
-      let currentType = this.unplacedDice.type[i];
-      let currentValue = this.unplacedDice.value[i];
-      if(currentDie == 'fire' && this.fire == 0) { 
-        [this.unplacedDice.type[0], currentType]= [currentType, this.unplacedDice.type[0]];
-        [this.unplacedDice.value[0], currentValue]= [currentValue, this.unplacedDice.value[0]]
-      } else {
-        [this.unplacedDice.type[diceCount], currentType]= [currentType, this.unplacedDice.type[diceCount]];
-        [this.unplacedDice.value[diceCount], currentValue]= [currentValue, this.unplacedDice.value[diceCount]]
-      }
-
+      this.sortUnplacedDice(this.unplacedDice.type, this.unplacedDice.value);
     }
-      
   }
+  dieRoll(randomDie) {
+        let roll = Math.floor(Math.random()*6 + Math.floor((randomDie/4)));
+        // debugger;
+        return roll;     
+  } 
+  sortUnplacedDice(dieType = [], dieValue = []) {
+    // fire = 0
+    // let unplacedDice = {
+    //   value : ['bucket','fire','cannonball'],
+    //   type : ['white', 'green', 'red']
+    // }
+    
+    let diceCount = dieType.length
 
-  
-
+    for(let i = 0; i < diceCount; i++){
+      let currentDie = {
+        type : dieType[i],
+        value : dieValue[i]
+      }
+      if(currentDie.value == 'fire' && this.fire == 0) { 
+        rearrangeDice(dieValue, 0, i, dieType);
+      } else if (currentDie.value == 'fire' && this.fire != 0){
+        rearrangeDice(dieType, diceCount, i, dieValue)
+      }
+    }
+    debugger;
+    for (let i = 0; i < diceCount; i++){
+      this.dicetrack.dice.type.push(dieType[0]);
+      this.dicetrack.dice.value.push(dieValue[0]);
+      this.unplacedDice.type.shift(0);
+      this.unplacedDice.value.shift(0)
+    }
+    debugger;
+  }
+      
+  rearrangeDice(x,y,z,a){
+    [x,y] = [y,x];
+    [z,a] = [a,z]
+  } 
   resolveDiceTrack() {}
 }
 
 
+  
 
 function setup(x=2) {
   for (let i = 0; i < x; i++) {
      players[i] = new Player();
      floatingPlayers.push(i);
-     y = Math.floor(Math.random() * 5)+1;
-     for (let j = 1; j <= y; j++){
-       players[i].dicebag.push(Math.floor(Math.random() * 4));
-      }
-  }
-  debugger;
+  //    y = Math.floor(Math.random() * 5)+1;
+  //    for (let j = 1; j <= y; j++){
+  //      players[i].dicebag.push(Math.floor(Math.random() * 4));
+  //     }
+  // }
+  // debugger;
+}
 }
 
 // console.log(player.dicetrack.quantity[0]);
-

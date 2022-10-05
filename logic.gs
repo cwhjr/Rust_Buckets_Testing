@@ -1,9 +1,6 @@
 
-function sortRolledDice(y, val, type) {
+function diceLogic(x, y= null, z= null) {
   
-  for (i = 0; i < value.length; i++){
-    player
 
-  }
 
 }
